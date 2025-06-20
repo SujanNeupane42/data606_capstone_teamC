@@ -6,3 +6,4 @@ wordcloud==1.9.4
 scikit-learn==1.7.0
 sentence-transformers==4.1.0
 vllm==0.9.1
+groq==0.28.0
