@@ -58,7 +58,7 @@ def load_model():
         model = EmbeddingClassifier()
         model_path = "bestModel.pth"
         
-        state_dict = torch.load(model_path, map_location=device)  # Load state dict
+        state_dict = torch.load(model_path, map_location=torch.device(device)) 
         model.load_state_dict(state_dict)
         model.to(device) 
         model.eval()
