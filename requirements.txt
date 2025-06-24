@@ -7,3 +7,6 @@ scikit-learn==1.7.0
 sentence-transformers==4.1.0
 vllm==0.9.1
 groq==0.28.0
+streamlit==1.39.0
+torch>=2.0.0
+transformers>=4.21.0
