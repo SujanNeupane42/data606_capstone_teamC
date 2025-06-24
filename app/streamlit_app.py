@@ -17,12 +17,12 @@ import os
 import platform
 import psutil
 
-'''
-adding this solves the issue given below but no idea why this is happening (works locally though)
-2025-06-24 22:11:51.127 Examining the path of torch.classes raised: Tried to instantiate class '__path__._path', but it does not exist! Ensure that it is registered via torch::class_
+# '''
+# adding this solves the issue given below but no idea why this is happening (works locally though)
+# 2025-06-24 22:11:51.127 Examining the path of torch.classes raised: Tried to instantiate class '__path__._path', but it does not exist! Ensure that it is registered via torch::class_
 
-https://discuss.streamlit.io/t/message-error-about-torch/90886/5
-'''
+# https://discuss.streamlit.io/t/message-error-about-torch/90886/5
+# '''
 torch.classes.__path__ = [] 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
