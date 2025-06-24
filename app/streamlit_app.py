@@ -66,7 +66,7 @@ def load_model():
     """Load the pre-trained model and updated/finetuned weights"""
     try:
         model = EmbeddingClassifier()
-        model_path = "bestModel.pth"
+        model_path = "app/bestModel.pth"
         
         state_dict = torch.load(model_path, map_location=torch.device(device)) 
         model.load_state_dict(state_dict)
