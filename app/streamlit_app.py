@@ -1,4 +1,13 @@
 import streamlit as st
+
+# This must be the first Streamlit command
+st.set_page_config(
+    page_title="Fake News Detector",
+    page_icon="📰",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 import torch
 import torch.nn as nn
 import numpy as np
@@ -17,13 +26,6 @@ https://discuss.streamlit.io/t/message-error-about-torch/90886/5
 torch.classes.__path__ = [] 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
-st.set_page_config(
-    page_title="Fake News Detector",
-    page_icon="📰",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 class EmbeddingClassifier(nn.Module):
     def __init__(self, model_name='sentence-transformers/all-MiniLM-L6-v2'):
