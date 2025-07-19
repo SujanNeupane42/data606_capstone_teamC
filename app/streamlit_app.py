@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 st.set_page_config(page_title="Fake News Detector", page_icon="📰", layout="wide", initial_sidebar_state="expanded")
 
 import torch
@@ -8,6 +9,7 @@ import numpy as np
 import pandas as pd
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 from peft import LoraConfig, get_peft_model, TaskType, PeftModel
+from llm import return_prompt, run_groq_summary
 
 import os
 import platform
@@ -43,18 +45,52 @@ def load_model():
         st.error(f"Error loading model: {str(e)}")
         return None, None
 
+def perform_summarization(title: str, text: str, combined_text: str) -> str:
+    '''
+    If the text is larger than 512 tokens, we will perform summrization using an LLM.
+
+    Args:
+        title (str): The title of the news article.
+        text (str): The original text of the news article.
+        combined_text (str): The combined text of title and article body.
+    Returns:
+        str: The combined text after summarization if needed, otherwise the original combined text.
+    '''
+    num_combined_tokens = len(tokenizer.encode(combined_text, return_tensors='pt')[0])
+    if num_combined_tokens > 512:
+        print(f"Combined text is {num_combined_tokens} tokens, which exceeds the 512 token limit. Summarizing...")
+        title_token_count = len(tokenizer.encode(title, return_tensors='pt')[0])
+        text_token_count = len(tokenizer.encode(text, return_tensors='pt')[0])
+        prompt = return_prompt(
+            title=title,
+            text=text,
+            title_token_count=title_token_count,
+            text_token_count=text_token_count,
+            available_tokens_for_summarization = 512 - title_token_count
+        )
+
+        summarized_text = run_groq_summary(prompt, combined_text, max_tokens=512 - title_token_count)
+        print("summarized_text: \n", summarized_text)
+        combined_text = f"{title} {summarized_text}"
+
+    return combined_text
+
 
 def predict_news(model, title: str, text: str):
-    """Given a title/text, predict whether it is fake/real"""
+    """Given a title/text, predict whether it is fake/real
+    Args:
+        model: The pre-trained model loaded with LoRA weights.
+        title (str): The title of the news article.
+        text (str): The content of the news article.    
+    Returns:
+        tuple: A tuple containing the predicted class (0 for Real, 1 for Fake) and the probabilities for each class.
+    """
     try:
-        # user can pass either title, text, or both but at least one must be filled
-        if pd.isna(title) or title.strip() == "":
-            input_text = text
-        elif pd.isna(text) or text.strip() == "":
-            input_text = title
-        else:
-            input_text = f"{title} {text}"
-        
+        input_text = f"{title} {text}"
+        print(title)
+        # check if input text is too long or not, and perform summarization if needed
+        input_text = perform_summarization(title, text, input_text)
+
         # extracting input_ids and attention_mask from the tokenizer and making predictions
         with torch.no_grad():
             encoding = tokenizer(input_text, padding="max_length", truncation=True, max_length=512, return_tensors="pt")
@@ -86,7 +122,7 @@ def main():
         - Training:
             - Fine-tuned on a fake news dataset
             - ~97% accuracy on test set, 99% on additional test data
-            - Uses mixed text (title + article body)
+            - Uses mixed text (title + article body) and llama-3.3-70b for summarizing huge articles
         """
     )
     
@@ -160,7 +196,6 @@ def main():
                     st.markdown(f"**Overall Confidence:** :{confidence_color}[{confidence_level} ({confidence:.2%})]")
     
     st.markdown("---")
-
     
 if __name__ == "__main__":
     main()
