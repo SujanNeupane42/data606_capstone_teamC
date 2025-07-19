@@ -1,7 +1,6 @@
 streamlit==1.39.0
 torch==2.6.0
-transformers>=4.21.0
-sentence-transformers==4.1.0
+transformers==4.41.1
 psutil>=5.8.0
 peft==0.16.0
 groq==0.28.0
