@@ -18,12 +18,11 @@ Binary classification of news articles as real or fake using various ML/DL appro
 
 ### Deep Learning  
 - 1D CNN
-- 2D CNN
+- 2D CNN (reshaping the embedding to a matrix to mimic a grey-scale image)
 - MLP
+- Full fine-tuned embedding classifier
+- LoRA based Embedding-Classifier finetuning
 
-### Embeddings
-- Pre-trained sentence-transformers
-- **Fine-tuned embedding classifier** (best model)
 
 ## Results
 
