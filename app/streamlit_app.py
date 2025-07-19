@@ -37,7 +37,7 @@ def load_model():
             id2label={0: "Real", 1: "Fake"},
             label2id={"Real": 0, "Fake": 1}
         )
-        model = PeftModel.from_pretrained(base_model, "LORA")
+        model = PeftModel.from_pretrained(base_model, "app/LoRA")
         model.eval()
         
         return model
