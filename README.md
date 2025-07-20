@@ -36,8 +36,12 @@ Binary classification of news articles as real or fake using various ML/DL appro
 | Fine-tuned Embeddings | 99% |
 | Fine-tuned Embeddings with LoRA | **99%** |
 
-**Best Model**: sentence-transformers/all-MiniLM-L6-v2 + MLP (384→128→128→2)  
-**ROC AUC**: 99.48%
+**Best Model Performance Metrics (Fine-tuned Embeddings with LoRA)**:
+- **Accuracy**: 99%
+- **Macro Avg Precision**: 0.99
+- **Macro Avg Recall**: 0.99
+- **Macro Avg F1-Score**: 0.99
+- **ROC AUC**: 0.9996
 
 ## Streamlit App
 
