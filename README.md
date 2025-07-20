@@ -26,14 +26,15 @@ Binary classification of news articles as real or fake using various ML/DL appro
 
 ## Results
 
-These are filler values (Need to update)
-| Model | Accuracy | F1-Score |
-|-------|----------|----------|
-| Logistic Regression | ~85% | 0.84 |
-| XGBoost | ~88% | 0.88 |
-| 1D CNN | ~93% | 0.93 |
-| MLP | ~92% | 0.92 |
-| **Fine-tuned Embeddings** | **96%** | **0.96** |
+| Model | Accuracy |
+|-------|----------|
+| Logistic Regression | 90% |
+| XGBoost | 96% |
+| 1D CNN | 88% |
+| 2D CNN | 87% |
+| MLP | 93% |
+| Fine-tuned Embeddings | 99% |
+| Fine-tuned Embeddings with LoRA | **99%** |
 
 **Best Model**: sentence-transformers/all-MiniLM-L6-v2 + MLP (384→128→128→2)  
 **ROC AUC**: 99.48%
