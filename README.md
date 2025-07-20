@@ -45,6 +45,9 @@ Binary classification of news articles as real or fake using various ML/DL appro
 
 ## Streamlit App
 
+The fake news detection app is deployed and accessible at: [https://fakenewsweb.streamlit.app/](https://fakenewsweb.streamlit.app/)
+
+To run locally:
 ```bash
 cd app
 streamlit run streamlit_app.py
