@@ -68,6 +68,6 @@ streamlit run streamlit_app.py
 ```
 
 ## Team
-- Sujan Neupane (bv23415)
+- Sujan Neupane 
 - Danny McKirgan
 - Mindy Shang
