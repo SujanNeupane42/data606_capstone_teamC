@@ -40,7 +40,7 @@ Binary classification of news articles as real or fake using various ML/DL appro
 Table for macro average precision, recall, f1 score, accuracy, AUC score, and false positives and negatives count for each classification model prediction on the final independent test set. This test dataset has 21417 negative or real news samples and 23481 fake news or positive samples.
 <br><br>
 
-![Confusion Matrix for LoRA-Embedding Classifier](image.png)
+![Confusion Matrix for LoRA-Embedding Classifier](Images\CM.png)
 <br>
 Confusion matrix for the LoRA-Embedding classifier model based on its predictions on the final test set, representing TNs, TPs, FPs, and FNs.
 
